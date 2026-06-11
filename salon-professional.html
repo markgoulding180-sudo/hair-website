@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison de Beauté – Premium Hair Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ivory:    #F9F5EF;
+    --ecru:     #EDE8DF;
+    --gold:     #BFA068;
+    --gold-lt:  #E2C98A;
+    --charcoal: #2A2420;
+    --warm-grey:#7A706A;
+    --cream:    #FFFDF9;
+    --rose-dust:#C8A098;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--charcoal); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(249,245,239,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ecru);
+    transition: padding .3s;
+  }
+  .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    letter-spacing: .08em;
+    color: var(--charcoal);
+  }
+  .wordmark em { color: var(--gold); font-style: italic; }
+  nav ul { list-style: none; display: flex; gap: 34px; }
+  nav ul li a {
+    text-decoration: none;
+    color: var(--warm-grey);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  nav ul li a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--charcoal);
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 3px;
+    letter-spacing: .1em;
+    transition: background .2s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--charcoal) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 100vh;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(42,36,32,.85) 0%, rgba(42,36,32,.45) 55%, rgba(42,36,32,.1) 100%),
+      url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&q=80') center/cover no-repeat;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 48px;
+    max-width: 660px;
+    margin-top: 80px;
+  }
+  .pretitle {
+    font-size: 0.72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 20px;
+  }
+  .hero-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.2rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .hero-content h1 em { color: var(--gold-lt); font-style: italic; }
+  .hero-content p {
+    color: rgba(255,255,255,.72);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 440px;
+    margin-bottom: 40px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--charcoal);
+    padding: 16px 36px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background .2s, transform .2s;
+  }
+  .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.45);
+    padding: 15px 36px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: border-color .2s;
+  }
+  .btn-ghost:hover { border-color: #fff; }
+
+  /* scroll hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,.45);
+    font-size: 0.68rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+    z-index: 3;
+  }
+  .scroll-hint::after { content: '↓'; font-size: 1.2rem; }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+  /* ── MANIFESTO STRIP ── */
+  .manifesto {
+    background: var(--charcoal);
+    color: rgba(255,255,255,.55);
+    padding: 22px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    font-size: 0.75rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .manifesto strong { color: var(--gold); }
+  .manifesto-div { width: 1px; height: 20px; background: rgba(255,255,255,.2); }
+
+  /* ── ABOUT ── */
+  .about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 580px;
+  }
+  .about-img {
+    background: url('https://images.unsplash.com/photo-1560066984-138daaa7ba56?w=900&q=80') center/cover no-repeat;
+    min-height: 400px;
+  }
+  .about-body {
+    background: var(--ivory);
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .label {
+    font-size: 0.7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .about-body h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.2;
+    margin-bottom: 22px;
+  }
+  .about-body h2 em { color: var(--gold); font-style: italic; }
+  .about-body p { color: var(--warm-grey); line-height: 1.85; font-weight: 300; margin-bottom: 16px; font-size: 1rem; }
+  .divider-gold { width: 52px; height: 2px; background: var(--gold); margin: 24px 0; }
+  .pillars { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 10px; }
+  .pillar { text-align: center; }
+  .pillar .val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); display: block; }
+  .pillar .lbl { font-size: 0.72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--warm-grey); }
+
+  /* ── SERVICES ── */
+  .services { padding: 90px 48px; background: var(--cream); }
+  .services .section-head { text-align: center; margin-bottom: 56px; }
+  .services .section-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 400; }
+  .services .section-head p { color: var(--warm-grey); margin-top: 10px; font-weight: 300; font-size: 1rem; }
+  .services-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--ecru);
+    border: 1px solid var(--ecru);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .svc {
+    background: var(--cream);
+    padding: 44px 34px;
+    transition: background .25s;
+    cursor: default;
+  }
+  .svc:hover { background: var(--ivory); }
+  .svc-icon { font-size: 1.8rem; margin-bottom: 18px; }
+  .svc h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; margin-bottom: 10px; color: var(--charcoal); }
+  .svc p { color: var(--warm-grey); font-size: 0.9rem; line-height: 1.75; font-weight: 300; }
+  .svc-price { margin-top: 16px; font-size: 0.78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+  /* ── GALLERY ── */
+  .gallery { padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 320px 320px; gap: 4px; }
+  .g-item { overflow: hidden; }
+  .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; filter: brightness(.92) saturate(.9); }
+  .g-item:hover img { transform: scale(1.05); filter: brightness(1) saturate(1); }
+  .g-item.tall { grid-row: span 2; }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy {
+    background: var(--charcoal);
+    padding: 90px 48px;
+    text-align: center;
+  }
+  .philosophy h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    color: #fff;
+    font-weight: 400;
+    font-style: italic;
+    max-width: 780px;
+    margin: 0 auto 24px;
+    line-height: 1.2;
+  }
+  .philosophy h2 em { color: var(--gold-lt); }
+  .philosophy p { color: rgba(255,255,255,.55); font-weight: 300; max-width: 500px; margin: 0 auto; line-height: 1.8; }
+
+  /* ── TEAM ── */
+  .team { padding: 90px 48px; background: var(--ivory); }
+  .team .section-head { text-align: center; margin-bottom: 52px; }
+  .team .section-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 400; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto; }
+  .team-card { text-align: center; }
+  .team-img {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover;
+    filter: brightness(.95) saturate(.85);
+    margin-bottom: 20px;
+    transition: filter .3s;
+  }
+  .team-card:hover .team-img { filter: brightness(1) saturate(1); }
+  .team-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 4px; }
+  .team-card span { font-size: 0.75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+
+  /* ── BOOKING CTA ── */
+  .booking-cta {
+    padding: 100px 48px;
+    background: var(--ivory);
+    text-align: center;
+    border-top: 1px solid var(--ecru);
+  }
+  .booking-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 400; margin-bottom: 14px; }
+  .booking-cta p { color: var(--warm-grey); font-size: 1rem; font-weight: 300; margin-bottom: 36px; }
+  .contact-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .contact-item { font-size: 0.85rem; color: var(--warm-grey); letter-spacing: .05em; }
+  .contact-item a { color: var(--charcoal); text-decoration: none; font-weight: 500; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,.4);
+    padding: 36px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.78rem;
+    letter-spacing: .06em;
+  }
+  footer .wm { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--gold); }
+  footer a { color: rgba(255,255,255,.4); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    nav ul { display: none; }
+    .hero-content { padding: 0 20px; }
+    .about-split { grid-template-columns: 1fr; }
+    .about-body { padding: 48px 24px; }
+    .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .g-item.tall { grid-row: span 1; }
+    .services, .team, .booking-cta, .philosophy { padding: 60px 20px; }
+    footer { padding: 28px 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wordmark">Maison <em>de Beauté</em></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#book" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="pretitle">Premium Hair &amp; Beauty · Est. 2015</p>
+    <h1>Where Style Meets <em>Artistry</em></h1>
+    <p>A sanctuary of refined beauty — where every visit is a considered experience, every style a signature, and every client leaves luminous.</p>
+    <div class="hero-btns">
+      <a href="#book" class="btn-gold">Reserve Your Appointment</a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- MANIFESTO -->
+<div class="manifesto">
+  <span><strong>Hair</strong> · Colour · Styling</span>
+  <div class="manifesto-div"></div>
+  <span><strong>Nails</strong> · Beauty · Treatments</span>
+  <div class="manifesto-div"></div>
+  <span>Bespoke · <strong>Provincial</strong> · Personal</span>
+  <div class="manifesto-div"></div>
+  <span>By Appointment · <strong>Walk-ins Welcome</strong></span>
+</div>
+
+<!-- ABOUT -->
+<section class="about-split" id="about">
+  <div class="about-img"></div>
+  <div class="about-body">
+    <span class="label">Our Approach</span>
+    <h2>Artisan craft in a <em>calm setting</em></h2>
+    <p>Maison de Beauté was born from a belief that a salon visit should feel like a restorative ritual — not a rushed errand. Our studio is a considered space: soft light, unhurried time, and a team whose passion for their craft is evident in every detail.</p>
+    <p>We draw on classic provincial elegance — quality over volume, relationship over transaction, mastery over trend-chasing. Every client receives a consultation that is truly listened to.</p>
+    <div class="divider-gold"></div>
+    <div class="pillars">
+      <div class="pillar"><span class="val">10+</span><span class="lbl">Years crafting beauty</span></div>
+      <div class="pillar"><span class="val">★ 5</span><span class="lbl">Consistently rated</span></div>
+      <div class="pillar"><span class="val">100%</span><span class="lbl">By consultation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-head">
+    <span class="label">What We Offer</span>
+    <h2>Our Services</h2>
+    <p>Every treatment is delivered with precision and care, using only premium products.</p>
+  </div>
+  <div class="services-row">
+    <div class="svc">
+      <div class="svc-icon">✂</div>
+      <h3>Cut &amp; Finish</h3>
+      <p>Precision cutting tailored to your face shape, lifestyle, and individual style. Finished to perfection.</p>
+      <p class="svc-price">From £45</p>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">◈</div>
+      <h3>Colour &amp; Toning</h3>
+      <p>Full colour, highlights, balayage, and gloss treatments — rich, lasting, beautifully executed.</p>
+      <p class="svc-price">From £75</p>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">◇</div>
+      <h3>Treatments</h3>
+      <p>Deep conditioning, Olaplex, keratin smoothing — your hair's health is our priority.</p>
+      <p class="svc-price">From £40</p>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">◉</div>
+      <h3>Nail Studio</h3>
+      <p>Gel, shellac, acrylics, and nail artistry. Hands that deserve as much attention as your hair.</p>
+      <p class="svc-price">From £35</p>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">◈</div>
+      <h3>Beauty Suite</h3>
+      <p>Brows, lashes, waxing, facials, and makeup artistry for every occasion.</p>
+      <p class="svc-price">From £25</p>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">◇</div>
+      <h3>Bridal &amp; Events</h3>
+      <p>Full bridal party packages, occasion styling, and on-location services available.</p>
+      <p class="svc-price">POA</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery">
+  <div class="g-item tall">
+    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80" alt="Salon interior" loading="lazy" />
+  </div>
+  <div class="g-item">
+    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt="Hair styling" loading="lazy" />
+  </div>
+  <div class="g-item">
+    <img src="https://images.unsplash.com/photo-1614959063816-9c2e4c3cd7b6?w=600&q=80" alt="Colour treatment" loading="lazy" />
+  </div>
+  <div class="g-item">
+    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80" alt="Salon tools" loading="lazy" />
+  </div>
+  <div class="g-item">
+    <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=80" alt="Blowdry finish" loading="lazy" />
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <h2>"We believe beauty is a feeling, not just a <em>finish</em>"</h2>
+  <p>Every client carries a story. Our role is simply to make sure they tell it with a little more confidence, a little more grace, and hair they absolutely love.</p>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-head">
+    <span class="label">The Team</span>
+    <h2>Meet Your Stylists</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <img class="team-img" src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&q=80" alt="Senior Stylist" loading="lazy" />
+      <h4>Claire Fontaine</h4>
+      <span>Senior Stylist & Colourist</span>
+    </div>
+    <div class="team-card">
+      <img class="team-img" src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&q=80" alt="Colour Technician" loading="lazy" />
+      <h4>Amelia Rose</h4>
+      <span>Colour Technician</span>
+    </div>
+    <div class="team-card">
+      <img class="team-img" src="https://images.unsplash.com/photo-1604695573706-53170668f6a6?w=400&q=80" alt="Nail & Beauty Artist" loading="lazy" />
+      <h4>Sophie Laurent</h4>
+      <span>Nail & Beauty Artist</span>
+    </div>
+    <div class="team-card">
+      <img class="team-img" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80" alt="Stylist" loading="lazy" />
+      <h4>Isabelle Mercer</h4>
+      <span>Stylist & Brow Specialist</span>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-cta" id="book">
+  <span class="label">Ready When You Are</span>
+  <h2>Book Your Visit</h2>
+  <p>Reserve your appointment online, by phone, or simply walk in — our team will take care of the rest.</p>
+  <a href="tel:+441234567890" class="btn-gold">Reserve Online or Call</a>
+  <div class="contact-row">
+    <span class="contact-item">📞 <a href="tel:+441234567890">01234 567 890</a></span>
+    <span class="contact-item">📧 <a href="mailto:hello@maisondebeau.co.uk">hello@maisondebeau.co.uk</a></span>
+    <span class="contact-item">📍 High Street, Town Centre · Mon–Sat 9–6</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="wm">Maison de Beauté</span>
+  <span>© 2025 · All rights reserved · <a href="#">Privacy Policy</a></span>
+  <span>Crafted with care · <a href="#">Instagram</a> · <a href="#">Facebook</a></span>
+</footer>
+
+</body>
+</html>

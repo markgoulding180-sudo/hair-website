@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hair Today – Mobile Hairdresser & Home Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blush:    #F5C6C6;
+    --rose:     #D4687A;
+    --warm:     #FDF6F0;
+    --cream:    #FFF8F4;
+    --bark:     #5C3D2E;
+    --sage:     #8BAF8A;
+    --text:     #3A2921;
+    --muted:    #8A7068;
+  }
+
+  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--cream);
+    border-bottom: 2px solid var(--blush);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--rose);
+    font-style: italic;
+  }
+  .nav-logo span { color: var(--bark); font-style: normal; }
+  nav ul { list-style: none; display: flex; gap: 22px; }
+  nav ul li a { text-decoration: none; color: var(--bark); font-weight: 600; font-size: 0.9rem; transition: color .2s; }
+  nav ul li a:hover { color: var(--rose); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #FDF0EC 0%, #FADADD 50%, #F5EFE8 100%);
+    padding: 60px 24px 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-text { max-width: 480px; }
+  .eyebrow {
+    display: inline-block;
+    background: var(--sage);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--bark);
+    margin-bottom: 8px;
+  }
+  .hero-text h1 em { color: var(--rose); font-style: italic; }
+  .hero-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 14px 0 28px;
+  }
+  .btn-primary {
+    background: var(--rose);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 18px rgba(212,104,122,.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,104,122,.4); }
+  .btn-secondary {
+    margin-left: 14px;
+    color: var(--rose);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--blush);
+    padding-bottom: 2px;
+  }
+
+  /* logo illustration */
+  .hero-logo-wrap {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    flex-shrink: 0;
+  }
+  .logo-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #fff5f7, #fce8dc);
+    border: 4px solid var(--blush);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 40px rgba(212,104,122,.2);
+  }
+  .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* flower decorations */
+  .petal { position: absolute; font-size: 1.8rem; animation: sway 3s ease-in-out infinite; }
+  .petal:nth-child(1) { top: -10px; left: 30px; animation-delay: 0s; }
+  .petal:nth-child(2) { top: 20px; right: -10px; animation-delay: .6s; }
+  .petal:nth-child(3) { bottom: 10px; left: -10px; animation-delay: 1.2s; }
+  .petal:nth-child(4) { bottom: -8px; right: 30px; animation-delay: 1.8s; }
+  @keyframes sway { 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(8deg)} }
+
+  /* ── TAGLINE STRIP ── */
+  .strip {
+    background: var(--rose);
+    color: #fff;
+    text-align: center;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+  }
+  .strip span { opacity: .7; margin: 0 18px; }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 60px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .about-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px 32px;
+    max-width: 520px;
+    box-shadow: 0 4px 24px rgba(92,61,46,.08);
+    border-left: 5px solid var(--rose);
+  }
+  .about-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--bark);
+    margin-bottom: 16px;
+  }
+  .about-card p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .about-card .values { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .tag {
+    background: var(--warm);
+    border: 1.5px solid var(--blush);
+    color: var(--rose);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+  .about-stats { display: flex; flex-direction: column; gap: 20px; }
+  .stat-box {
+    background: var(--warm);
+    border-radius: 16px;
+    padding: 20px 26px;
+    text-align: center;
+    border: 2px solid var(--blush);
+  }
+  .stat-box .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--rose);
+    display: block;
+  }
+  .stat-box .lbl { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--warm); padding: 60px 24px; }
+  .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--bark);
+  }
+  .section-title p { color: var(--muted); margin-top: 8px; font-size: 1rem; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px 22px;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(92,61,46,.06);
+    transition: transform .25s, box-shadow .25s;
+    cursor: default;
+  }
+  .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(212,104,122,.15); }
+  .service-icon { font-size: 2.4rem; margin-bottom: 12px; }
+  .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--bark); margin-bottom: 8px; }
+  .service-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+  .price { display: inline-block; margin-top: 12px; background: var(--blush); color: var(--bark); font-weight: 700; font-size: 0.85rem; padding: 4px 14px; border-radius: 12px; }
+
+  /* ── HOW IT WORKS ── */
+  .how { padding: 60px 24px; max-width: 900px; margin: 0 auto; }
+  .steps { display: flex; gap: 0; flex-wrap: wrap; justify-content: center; margin-top: 36px; }
+  .step {
+    flex: 1;
+    min-width: 180px;
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '✂';
+    position: absolute;
+    right: -14px; top: 22px;
+    color: var(--blush);
+    font-size: 1.2rem;
+  }
+  .step-num {
+    width: 52px; height: 52px;
+    background: var(--rose);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin: 0 auto 14px;
+  }
+  .step h4 { color: var(--bark); font-size: 1rem; margin-bottom: 6px; }
+  .step p { color: var(--muted); font-size: 0.86rem; line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: linear-gradient(135deg, #FADADD 0%, #FDF0EC 100%); padding: 60px 24px; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 900px; margin: 36px auto 0; }
+  .testi-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 2px 14px rgba(92,61,46,.07);
+  }
+  .stars { color: var(--rose); font-size: 1rem; margin-bottom: 10px; }
+  .testi-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.7; font-style: italic; margin-bottom: 14px; }
+  .testi-name { font-weight: 700; color: var(--bark); font-size: 0.9rem; }
+
+  /* ── BOOKING CTA ── */
+  .cta-section {
+    padding: 70px 24px;
+    text-align: center;
+    background: var(--bark);
+    color: #fff;
+  }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 12px; }
+  .cta-section p { color: rgba(255,255,255,.75); font-size: 1.05rem; margin-bottom: 30px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-light {
+    background: #fff;
+    color: var(--bark);
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: transform .2s;
+  }
+  .btn-light:hover { transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,.5);
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: border-color .2s;
+  }
+  .btn-outline:hover { border-color: #fff; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #2E1D18;
+    color: rgba(255,255,255,.6);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--blush); text-decoration: none; }
+  .footer-heart { color: var(--rose); }
+
+  @media (max-width: 600px) {
+    nav ul { display: none; }
+    .step:not(:last-child)::after { display: none; }
+    .hero { padding: 40px 20px; }
+    .btn-secondary { display: block; margin: 14px 0 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><em>Hair Today</em> <span>✂</span></div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#booking">Book</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="eyebrow">Mobile & Home Salon · Serving Your Community</span>
+    <h1>Beauty that comes <em>to you</em> ♡</h1>
+    <p>Your local hairdresser, nail tech & beauty lover — bringing confidence, colour, and a whole lot of joy right to your door. Self-employed, passionate, and proud to serve.</p>
+    <a href="#booking" class="btn-primary">Book an Appointment</a>
+    <a href="#services" class="btn-secondary">See Services →</a>
+  </div>
+
+  <div class="hero-logo-wrap">
+    <span class="petal">🌸</span>
+    <span class="petal">🌼</span>
+    <span class="petal">💐</span>
+    <span class="petal">🌺</span>
+    <div class="logo-circle">
+      <img src="/mnt/user-data/uploads/1781169487878_image.png" alt="Your local hairdresser – Hairdresser, Nail Tech & Beauty Lover" />
+    </div>
+  </div>
+</section>
+
+<!-- TAGLINE STRIP -->
+<div class="strip">
+  Hair Today, Confidence Forever
+  <span>♡</span>
+  Coffee · Confidence · Cute Dogs
+  <span>♡</span>
+  Beauty is my Business &amp; Passion
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-card">
+    <h2>Your Neighbour, Your Stylist</h2>
+    <p>Hi! I'm a self-employed mobile hairdresser and beauty therapist who works from my home salon too. I believe everyone deserves to feel amazing — whether you're popping in for a trim or I'm coming straight to your kitchen chair.</p>
+    <p>I bring the full salon experience to you: cuts, colour, nails, and all the treatments you love — with a brew, a chat, and the occasional golden retriever photobomb. 🐾</p>
+    <div class="values">
+      <span class="tag">✂ Hair</span>
+      <span class="tag">💅 Nails</span>
+      <span class="tag">💄 Beauty</span>
+      <span class="tag">🌸 Home Visits</span>
+      <span class="tag">🐾 Dog Friendly</span>
+    </div>
+  </div>
+  <div class="about-stats">
+    <div class="stat-box"><span class="num">10+</span><span class="lbl">Years Experience</span></div>
+    <div class="stat-box"><span class="num">★ 5</span><span class="lbl">Star Rated</span></div>
+    <div class="stat-box"><span class="num">Local</span><span class="lbl">Friendly & Trusted</span></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-title">
+    <h2>What I Do</h2>
+    <p>Hair, beauty & nails — at yours or mine ♡</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <h3>Cut & Style</h3>
+      <p>Precision cuts, blowdries, and styling for every hair type and occasion.</p>
+      <span class="price">From £25</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>Colour</h3>
+      <p>Full colour, highlights, balayage, and toning — fresh colour, lasting results.</p>
+      <span class="price">From £55</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💅</div>
+      <h3>Nail Tech</h3>
+      <p>Gel nails, acrylics, nail art and manicures that stay looking gorgeous.</p>
+      <span class="price">From £30</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💄</div>
+      <h3>Beauty Treatments</h3>
+      <p>Brows, lashes, waxing, facials — the full pamper you deserve.</p>
+      <span class="price">From £20</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏡</div>
+      <h3>Mobile Visits</h3>
+      <p>I come to you — perfect for mobility, busy schedules, or just because you fancy it.</p>
+      <span class="price">+ small travel fee</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <h3>Home Salon</h3>
+      <p>Book in at my cosy home salon — a relaxed, personal setting, full pro results.</p>
+      <span class="price">From £25</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-title">
+    <h2>How It Works</h2>
+    <p>Simple, friendly booking — start to finish</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Get in Touch</h4>
+      <p>Call, text, or message me on Facebook to check availability.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Pick Your Time</h4>
+      <p>Choose a slot that suits you — evenings and weekends available.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Relax & Enjoy</h4>
+      <p>I arrive, set up, and you sit back — your kitchen can be your salon.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Love Your Look</h4>
+      <p>Walk out (or see me off) feeling completely fabulous. ♡</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-title">
+    <h2>What Clients Say</h2>
+    <p>Kind words from the community ♡</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Absolutely brilliant — she came to me after my hip op and I felt like myself again. Can't thank her enough!"</p>
+      <span class="testi-name">— Margaret, local client</span>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Best colour I've ever had and she's just a joy to have in the house. My nails look incredible too!"</p>
+      <span class="testi-name">— Sarah, regular client</span>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"So easy to book, always on time, and my hair is gorgeous every single time. Proper local gem."</p>
+      <span class="testi-name">— Julie, home salon client</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="booking">
+  <h2>Ready to Book? ♡</h2>
+  <p>Get in touch today — I'd love to hear from you</p>
+  <div class="cta-buttons">
+    <a href="tel:+441234567890" class="btn-light">📞 Call / Text Me</a>
+    <a href="https://www.facebook.com/Self-Employed-594445203920155/" target="_blank" class="btn-outline">Find Me on Facebook</a>
+  </div>
+</section>
+
+<footer>
+  <p>Made with <span class="footer-heart">♡</span> · Mobile Hairdresser &amp; Home Salon · Self-Employed &amp; Proud<br>
+  <a href="https://www.facebook.com/Self-Employed-594445203920155/" target="_blank">Facebook</a> · Bloom · Grow · Shine</p>
+</footer>
+
+</body>
+</html>
