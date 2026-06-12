@@ -309,6 +309,37 @@
   .social-card a:hover{ color:var(--gold-deep); }
   @media (max-width:760px){ .social-cards{ grid-template-columns:1fr; } }
 
+  /* ---------- gallery carousel ---------- */
+  .gallery-carousel{
+    position:relative; display:flex; align-items:center; gap:14px;
+    margin-bottom:0;
+  }
+  .gallery-track{
+    display:flex; gap:16px; overflow-x:auto; scroll-behavior:smooth;
+    scrollbar-width:none; padding:6px 0 18px;
+  }
+  .gallery-track::-webkit-scrollbar{ display:none; }
+  .gallery-track img{
+    flex:0 0 auto;
+    width:280px; height:340px; object-fit:cover;
+    border:1px solid var(--line-light);
+    transition: transform .4s ease, filter .4s ease;
+    filter:grayscale(15%);
+  }
+  .gallery-track img:hover{ transform:translateY(-6px); filter:grayscale(0%); }
+  .gallery-arrow{
+    flex:0 0 auto; width:46px; height:46px; border-radius:50%;
+    border:1px solid var(--line-light); background:var(--white);
+    color:var(--ink); font-size:1.3rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: all .25s; z-index:2;
+  }
+  .gallery-arrow:hover{ border-color:var(--gold); color:var(--gold-deep); }
+  @media (max-width:760px){
+    .gallery-track img{ width:200px; height:250px; }
+    .gallery-arrow{ display:none; }
+  }
+
   /* ---------- booking ---------- */
   .booking{ background: var(--offwhite); position:relative; }
   .booking-grid{ display:grid; grid-template-columns: 1fr 1.15fr; gap:1px; align-items:stretch; background:var(--line-light); border:1px solid var(--line-light); }
@@ -542,7 +573,7 @@
 <section class="crown" id="crown-revival">
   <div class="wrap crown-grid">
     <div class="crown-logo reveal">
-      <img src="imageslogo-crownrevival_jpg.jpg" alt="Anne's Crown Revival Hair Systems logo">
+      <img src="imageslogo-crownrevival.jpg.jpg" alt="Anne's Crown Revival Hair Systems logo">
     </div>
     <div>
       <span class="eyebrow reveal">New from Anne</span>
@@ -570,6 +601,31 @@
       <h2>See my latest work</h2>
       <p>Follow both pages for daily updates, finished looks, availability and offers.</p>
     </div>
+
+    <div class="gallery-carousel reveal">
+      <button class="gallery-arrow gallery-prev" aria-label="Previous photo">&#8249;</button>
+      <div class="gallery-track" id="galleryTrack">
+        <img src="gallery-01.jpg" alt="Hair and beauty work by Anne — example 1" loading="lazy">
+        <img src="gallery-02.jpg" alt="Hair and beauty work by Anne — example 2" loading="lazy">
+        <img src="gallery-03.jpg" alt="Hair and beauty work by Anne — example 3" loading="lazy">
+        <img src="gallery-04.jpg" alt="Hair and beauty work by Anne — example 4" loading="lazy">
+        <img src="gallery-05.jpg" alt="Hair and beauty work by Anne — example 5" loading="lazy">
+        <img src="gallery-06.jpg" alt="Hair and beauty work by Anne — example 6" loading="lazy">
+        <img src="gallery-07.jpg" alt="Hair and beauty work by Anne — example 7" loading="lazy">
+        <img src="gallery-08.jpg" alt="Hair and beauty work by Anne — example 8" loading="lazy">
+        <img src="gallery-09.jpg" alt="Hair and beauty work by Anne — example 9" loading="lazy">
+        <img src="gallery-10.jpg" alt="Hair and beauty work by Anne — example 10" loading="lazy">
+        <img src="gallery-11.jpg" alt="Hair and beauty work by Anne — example 11" loading="lazy">
+        <img src="gallery-12.jpg" alt="Hair and beauty work by Anne — example 12" loading="lazy">
+        <img src="gallery-13.jpg" alt="Hair and beauty work by Anne — example 13" loading="lazy">
+        <img src="gallery-14.jpg" alt="Hair and beauty work by Anne — example 14" loading="lazy">
+      </div>
+      <button class="gallery-arrow gallery-next" aria-label="Next photo">&#8250;</button>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:80px;">
+      <span class="eyebrow">Follow along</span>
+      <h2>Find Anne online</h2>
     <div class="social-cards">
       <div class="social-card reveal d1">
         <span class="tag">Hair · Nails · Beauty</span>
@@ -748,7 +804,16 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 revealEls.forEach(el => io.observe(el));
 
-/* ---------------- footer year ---------------- */
+/* ---------------- gallery carousel ---------------- */
+const galleryTrack = document.getElementById('galleryTrack');
+const prevBtn = document.querySelector('.gallery-prev');
+const nextBtn = document.querySelector('.gallery-next');
+if(galleryTrack){
+  const scrollAmount = () => galleryTrack.querySelector('img').offsetWidth + 16;
+  prevBtn.addEventListener('click', () => galleryTrack.scrollBy({left: -scrollAmount()*2, behavior:'smooth'}));
+  nextBtn.addEventListener('click', () => galleryTrack.scrollBy({left: scrollAmount()*2, behavior:'smooth'}));
+}
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* ================= CALENDAR / BOOKING ================= */
