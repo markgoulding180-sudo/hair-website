@@ -187,7 +187,19 @@
     .hero p.lead{ margin:0 auto 36px; }
     .hero-ctas{ justify-content:center; }
     .hero-visual{ order:-1; }
-    .medallion{ width:280px; }
+    .medallion{ width:min(86vw, 360px); }
+  }
+
+  @media (max-width: 600px){
+    section{ padding:64px 0; }
+    .wrap{ padding:0 18px; }
+    .hero{ padding-top:80px; min-height:auto; padding-bottom:64px; }
+    .hero h1{ font-size:clamp(2.1rem, 9vw, 2.8rem); }
+    .hero p.lead{ font-size:1rem; }
+    .btn{ width:100%; justify-content:center; padding:15px 24px; }
+    .hero-ctas{ flex-direction:column; gap:12px; }
+    .hero-ctas .btn{ width:100%; }
+    .medallion{ width:min(80vw, 320px); padding:12px; }
   }
 
   /* ---------- section heading ---------- */
@@ -483,10 +495,7 @@
     <div class="hero-visual">
       <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
       <div class="medallion">
-        <picture>
-          <source media="(max-width: 600px)" srcset="hero-mobile.jpg">
-          <img src="hero-desktop.jpg" alt="Anne — Mobile Hairdresser, Nail Tech & Beauty Lover">
-        </picture>
+        <img src="hero-desktop.jpg" alt="Anne — Mobile Hairdresser, Nail Tech & Beauty Lover" loading="eager">
       </div>
     </div>
   </div>
