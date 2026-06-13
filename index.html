@@ -528,16 +528,12 @@ nav a:hover, nav a:focus-visible{border-color:var(--terracotta);color:var(--terr
 }
 .about-visual{
   aspect-ratio:1;
-  background:linear-gradient(160deg, var(--sage-soft), var(--gold-soft));
+  background:#000 url('about-logo.jpg') center/contain no-repeat;
   border:1px solid rgba(201,138,107,.25);
   border-radius:var(--radius);
   position:relative;
 }
-.about-visual::before{
-  content:"AR";font-family:'Cormorant Garamond',serif;font-size:6rem;
-  color:rgba(255,255,255,.6);
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-}
+
 .about-text .eyebrow{text-align:left;}
 .about-text h2{text-align:left;}
 .about-text p{margin-bottom:16px;color:#aab8de;}
