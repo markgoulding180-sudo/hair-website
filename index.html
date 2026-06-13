@@ -1060,10 +1060,11 @@ revealEls.forEach(el => revealObserver.observe(el));
   let timer;
 
   function show(index){
+    slides[current].classList.remove('active');
     dots[current].classList.remove('active');
     dots[current].setAttribute('aria-selected','false');
     current = (index + slides.length) % slides.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
+    slides[current].classList.add('active');
     dots[current].classList.add('active');
     dots[current].setAttribute('aria-selected','true');
   }
