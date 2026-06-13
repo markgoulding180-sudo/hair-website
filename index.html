@@ -286,10 +286,11 @@ nav a:hover, nav a:focus-visible{border-color:var(--terracotta);color:var(--terr
 .slide:nth-child(2) .slide-image{background-image:url('hero-collage.jpg');background-size:cover;background-position:center;}
 .slide:nth-child(3) .slide-image{background-image:url('hero-facial.jpg');background-size:cover;background-position:center;}
 .slide:nth-child(4) .slide-image{
-  background-image: url('imageslogo-crownrevival.jpg'), linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
-  background-size: contain, cover;
-  background-position: center, center;
-  background-repeat: no-repeat, no-repeat;
+  background-color:#000;
+  background-image: url('imageslogo-crownrevival.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .slide-image::after{display:none;}
 /* odd slides: image right, content left | even slides: image left, content right */
@@ -490,8 +491,7 @@ nav a:hover, nav a:focus-visible{border-color:var(--terracotta);color:var(--terr
 .crown-visual{
   aspect-ratio:4/5;
   background:
-    radial-gradient(circle at 50% 35%, rgba(212,175,106,.22), transparent 60%),
-    linear-gradient(160deg, var(--dark-2), var(--dark));
+    #000 url('imageslogo-crownrevival.jpg') center/contain no-repeat;
   border:1px solid rgba(212,175,106,.35);
   border-radius:var(--radius);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -804,11 +804,7 @@ footer{background:var(--dark);color:#bdb3a8;padding:60px 0 30px;border-top:1px s
   <!-- ============ CROWN REVIVAL ============ -->
   <section class="section crown" id="crown-revival">
     <div class="container crown-inner reveal">
-      <div class="crown-visual">
-        <span class="crest" aria-hidden="true">&#10052;</span>
-        <h3 style="color:var(--gold-soft);">Crown Revival</h3>
-        <p>Hair Systems</p>
-      </div>
+      <div class="crown-visual" role="img" aria-label="Anne's Crown Revival Hair Systems logo"></div>
       <div>
         <span class="eyebrow">Hair Loss Solutions</span>
         <h2>Crown Revival Hair Systems</h2>
