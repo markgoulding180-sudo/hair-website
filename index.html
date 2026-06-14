@@ -746,20 +746,21 @@ footer{background:var(--dark);color:#c8bedf;padding:60px 0 30px;border-top:1px s
   .brand-text strong{font-size:1.2rem;}
   .brand-text span{display:none;}
 
-  /* Hero — full width, fixed height, image top/content bottom, NO layout shift */
+  /* Hero — full width, fixed height, NO scroll, NO layout shift */
   .hero-slider{
     margin:0;border-radius:0;
-    height:auto;min-height:0;max-height:none;
+    height:620px;min-height:620px;max-height:620px;
+    overflow:hidden;
   }
   .slides{
     position:relative;
-    height:560px; /* fixed — same for ALL slides, no jump */
+    height:620px;
   }
   .slide{
     position:absolute;inset:0;
     grid-template-columns:1fr!important;
-    grid-template-rows:240px 1fr;
-    height:560px;
+    grid-template-rows:240px 380px;
+    height:620px;
   }
   .slide-image{
     order:1!important;
@@ -772,35 +773,37 @@ footer{background:var(--dark);color:#c8bedf;padding:60px 0 30px;border-top:1px s
     order:2!important;
     padding:24px 20px 28px;
     transform:none!important;opacity:1!important;
-    overflow-y:auto;
-    height:320px;
+    overflow:hidden;
+    height:380px;
     display:flex;flex-direction:column;justify-content:center;
   }
-  .slide-content h1{font-size:clamp(1.6rem,5.5vw,2.2rem);margin-bottom:12px;}
-  .slide-content p{font-size:.88rem;margin-bottom:16px;}
-  .hero-actions{gap:10px;}
+  .slide-content h1{font-size:clamp(1.5rem,5vw,2rem);margin-bottom:10px;}
+  .slide-content p{font-size:.87rem;margin-bottom:14px;}
+  .hero-actions{gap:10px;flex-wrap:wrap;}
   .hero-actions .btn{padding:11px 18px;font-size:.72rem;}
 
-  /* Services showcase slider — fixed height, no layout shift */
+  /* Services showcase slider — fixed height, NO scroll, NO layout shift */
   .services-slider{overflow:hidden;}
   .svc-slide{
-    min-height:520px;height:520px;
+    min-height:580px;height:580px;
     overflow:hidden;
   }
   .svc-slide-intro,.svc-slide-info{
     grid-template-columns:1fr!important;
-    grid-template-rows:200px 1fr;
-    height:520px!important;min-height:0!important;
+    grid-template-rows:200px 380px;
+    height:580px!important;min-height:0!important;
+    overflow:hidden;
   }
   .svc-slide-intro.reverse{direction:ltr!important;}
-  .svc-main-img{order:1!important;height:200px!important;min-height:0;max-height:200px;}
-  .svc-info-img{order:1!important;height:200px!important;min-height:0;max-height:200px;}
-  .svc-intro-content{order:2!important;padding:20px 16px;overflow-y:auto;height:320px;}
-  .svc-info-content{order:2!important;padding:20px 16px;overflow-y:auto;height:320px;}
+  .svc-main-img{order:1!important;height:200px!important;min-height:0;max-height:200px;flex-shrink:0;}
+  .svc-info-img{order:1!important;height:200px!important;min-height:0;max-height:200px;flex-shrink:0;}
+  .svc-intro-content{order:2!important;padding:20px 16px;overflow:hidden;height:380px;display:flex;flex-direction:column;justify-content:center;}
+  .svc-info-content{order:2!important;padding:20px 16px;overflow:hidden;height:380px;display:flex;flex-direction:column;justify-content:center;}
   .svc-intro-content h2{font-size:1.5rem;margin-bottom:8px;}
-  .svc-intro-content p{font-size:.88rem;margin-bottom:12px;}
+  .svc-intro-content p{font-size:.87rem;margin-bottom:12px;}
   .svc-thumbs{grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px;}
   .svc-info-content h3{font-size:1.3rem;}
+  .svc-info-list{gap:8px;margin-bottom:16px;}
   .svc-info-list li{font-size:.85rem;}
 
   /* Services price grid — single column */
