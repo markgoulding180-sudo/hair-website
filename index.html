@@ -785,60 +785,110 @@ footer{background:var(--dark);color:#c8bedf;padding:60px 0 30px;border-top:1px s
   .hero-actions{gap:8px;flex-wrap:wrap;}
   .hero-actions .btn{padding:10px 16px;font-size:.7rem;}
 
-  /* Services showcase slider — fits one phone screen, no clipping */
+  /* ── SERVICES SLIDER: UNIFORM LAYOUT ───────────────────────
+     Type A (intro): image=150px | content=310px | total=460px
+     Type B (info):  image=150px | content=310px | total=460px
+     Every slide identical — no jumping, no clipping
+  ─────────────────────────────────────────────────────────── */
   .services-slider{overflow:hidden;}
-  .svc-slide{overflow:hidden;}
-  .svc-slide-intro,.svc-slide-info{
+
+  .svc-slide{
+    height:460px!important;
+    min-height:460px!important;
+    max-height:460px!important;
+    overflow:hidden;
+  }
+
+  /* Both slide types: same two-row grid */
+  .svc-slide-intro,
+  .svc-slide-info{
+    display:grid!important;
     grid-template-columns:1fr!important;
-    height:auto!important;min-height:0!important;
+    grid-template-rows:150px 310px!important;
+    height:460px!important;
+    min-height:460px!important;
     overflow:hidden;
   }
   .svc-slide-intro.reverse{direction:ltr!important;}
 
-  /* Image strip — short banner at top */
-  .svc-main-img{
-    order:1!important;
-    height:140px!important;min-height:0;max-height:140px;
-    flex-shrink:0;width:100%;
-  }
+  /* Row 1 — image, same height everywhere */
+  .svc-main-img,
   .svc-info-img{
+    height:150px!important;
+    min-height:150px!important;
+    max-height:150px!important;
+    width:100%;
     order:1!important;
-    height:140px!important;min-height:0;max-height:140px;
-    flex-shrink:0;width:100%;
+    flex-shrink:0;
+    background-size:cover;
+    background-position:center;
   }
 
-  /* Content area — compact */
-  .svc-intro-content{
-    order:2!important;
-    padding:14px 16px 16px;
-    overflow:hidden;
-    display:flex;flex-direction:column;
-  }
+  /* Row 2 — content, same height everywhere */
+  .svc-intro-content,
   .svc-info-content{
+    height:310px!important;
+    min-height:310px!important;
+    max-height:310px!important;
     order:2!important;
-    padding:14px 16px 16px;
     overflow:hidden;
-    display:flex;flex-direction:column;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    padding:12px 14px 10px;
+    gap:0;
   }
-  .svc-intro-content .eyebrow{margin-bottom:4px;font-size:.65rem;}
-  .svc-intro-content h2{font-size:1.3rem;margin-bottom:6px;line-height:1.1;}
-  .svc-intro-content p{font-size:.82rem;margin-bottom:10px;line-height:1.4;}
 
-  /* Thumbnails: 2×2 grid so they're small and tidy */
+  /* Type A text sizing */
+  .svc-intro-content .eyebrow{
+    font-size:.6rem;letter-spacing:.2em;margin-bottom:3px;
+  }
+  .svc-intro-content h2{
+    font-size:1.25rem;margin-bottom:5px;line-height:1.1;
+  }
+  .svc-intro-content p{
+    font-size:.78rem;line-height:1.35;margin-bottom:8px;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
   .svc-thumbs{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:5px;
-    margin-top:8px;
+    gap:4px;
+    margin-top:auto;
+    flex-shrink:0;
   }
-  .svc-thumb{aspect-ratio:1;border-radius:8px;}
+  .svc-thumb{
+    aspect-ratio:1;
+    border-radius:6px;
+    background-size:cover;background-position:center;
+  }
 
-  /* Info slide */
-  .svc-info-content h3{font-size:1.2rem;margin-bottom:10px;}
-  .svc-info-list{gap:5px;margin-bottom:12px;}
-  .svc-info-list li{font-size:.8rem;padding-bottom:5px;}
-  .svc-info-list .price{font-size:.9rem;}
-  .svc-info-content .btn{padding:10px 18px;font-size:.72rem;align-self:flex-start;}
+  /* Type B text sizing */
+  .svc-info-content h3{
+    font-size:1.1rem;margin-bottom:8px;line-height:1.15;
+    color:var(--gold-soft);
+  }
+  .svc-info-list{
+    list-style:none;
+    display:flex;flex-direction:column;
+    gap:4px;
+    margin-bottom:10px;
+    flex:1;
+  }
+  .svc-info-list li{
+    display:flex;justify-content:space-between;
+    font-size:.78rem;
+    padding-bottom:4px;
+    border-bottom:1px solid rgba(160,127,212,.15);
+    gap:6px;
+  }
+  .svc-info-list .price{
+    font-size:.85rem;white-space:nowrap;flex-shrink:0;
+  }
+  .svc-info-content .btn{
+    padding:9px 16px;font-size:.68rem;
+    align-self:flex-start;flex-shrink:0;margin-top:auto;
+  }
 
   /* Services price grid — single column */
   .service-groups{grid-template-columns:1fr;gap:20px;}
