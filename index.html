@@ -266,7 +266,11 @@ nav a:hover, nav a:focus-visible{border-color:var(--terracotta);color:var(--terr
   overflow:hidden;
   color:var(--ink);
   background:var(--paper);
+  margin:0 40px;
+  border-radius:var(--radius);
 }
+.slider-arrow{display:none!important;}
+.slider-dots{display:none!important;}
 .slides{position:relative;width:100%;height:100%;}
 .slide{
   position:absolute;inset:0;
@@ -416,6 +420,88 @@ nav a:hover, nav a:focus-visible{border-color:var(--terracotta);color:var(--terr
   .reveal,.reveal-stagger > *{opacity:1;transform:none;transition:none;}
 }
 
+/* ============ SERVICES SLIDER ============ */
+.services-slider{
+  position:relative;
+  background:var(--bg);
+  overflow:hidden;
+}
+.svc-slides{position:relative;width:100%;}
+
+/* SLIDE TYPE A — category intro (image left/right, text + 4 thumbs) */
+.svc-slide{
+  display:none;
+  animation:svcFadeIn .7s ease;
+}
+.svc-slide.active{display:block;}
+@keyframes svcFadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+
+.svc-slide-intro{
+  display:grid;grid-template-columns:1fr 1fr;min-height:520px;
+}
+.svc-slide-intro.reverse{direction:rtl;}
+.svc-slide-intro.reverse > *{direction:ltr;}
+
+.svc-main-img{
+  background:#e8e0f4 center/cover no-repeat;
+  min-height:400px;
+}
+.svc-intro-content{
+  padding:60px 50px;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--paper);
+}
+.svc-intro-content h2{font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:12px;text-align:left;}
+.svc-intro-content .eyebrow{text-align:left;}
+.svc-intro-content p{color:#5a4880;margin-bottom:28px;font-size:1rem;}
+.svc-thumbs{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:auto;
+}
+.svc-thumb{
+  aspect-ratio:1;border-radius:10px;
+  background:#e0d8f4 center/cover no-repeat;
+  overflow:hidden;
+}
+
+/* SLIDE TYPE B — full-width service info panel */
+.svc-slide-info{
+  min-height:420px;
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--dark);
+  color:var(--cream);
+}
+.svc-info-img{
+  background:#2b2050 center/cover no-repeat;
+}
+.svc-info-content{
+  padding:60px 50px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.svc-info-content h3{font-size:clamp(1.6rem,3vw,2.4rem);color:var(--gold-soft);margin-bottom:20px;}
+.svc-info-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+.svc-info-list li{
+  display:flex;justify-content:space-between;gap:10px;
+  font-size:.95rem;color:#d8cef0;border-bottom:1px solid rgba(160,127,212,.2);padding-bottom:10px;
+}
+.svc-info-list .price{color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;white-space:nowrap;}
+
+/* Progress bar */
+.svc-progress{
+  height:3px;background:rgba(91,63,160,.15);
+}
+.svc-progress-bar{
+  height:3px;background:var(--terracotta);width:0%;
+  transition:width linear;
+}
+
+@media(max-width:820px){
+  .svc-slide-intro,.svc-slide-info{grid-template-columns:1fr;}
+  .svc-slide-intro.reverse{direction:ltr;}
+  .svc-main-img,.svc-info-img{min-height:220px;}
+  .svc-intro-content,.svc-info-content{padding:36px 24px;}
+  .svc-thumbs{grid-template-columns:repeat(4,1fr);}
+}
+
 /* ============ SECTION TITLES ============ */
 .section{padding:90px 0;}
 .section-alt{background:var(--paper);}
@@ -443,6 +529,12 @@ nav a:hover, nav a:focus-visible{border-color:var(--terracotta);color:var(--terr
 .service-card h3{
   font-size:1.4rem;margin-bottom:18px;padding-bottom:14px;
   border-bottom:2px solid var(--gold);display:inline-block;
+}
+.card-img{
+  width:calc(100% + 60px);margin:-34px -30px 24px;
+  height:200px;
+  background-size:cover;background-position:center top;
+  border-radius:var(--radius) var(--radius) 0 0;
 }
 .service-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
 .service-list li{
@@ -715,7 +807,158 @@ footer{background:var(--dark);color:#c8bedf;padding:60px 0 30px;border-top:1px s
     </svg>
   </div>
 
+  <!-- ============ SERVICES SHOWCASE SLIDER ============ -->
+  <section class="services-slider" aria-label="Our services">
+    <div class="svc-progress"><div class="svc-progress-bar" id="svcProgressBar"></div></div>
+    <div class="svc-slides" id="svcSlides">
+
+      <!-- SLIDE 1A: HAIR — Intro -->
+      <div class="svc-slide active">
+        <div class="svc-slide-intro">
+          <div class="svc-main-img" style="background-image:url('hair-pink-colour.jpg')" role="img" aria-label="Hair colour result"></div>
+          <div class="svc-intro-content">
+            <span class="eyebrow">Our Services</span>
+            <h2>Hair</h2>
+            <p>From precision cuts and vibrant colour to blow-dry styling and special occasion looks — Anne transforms your hair at the salon or in your own home across Draycott, Long Eaton and Derbyshire.</p>
+            <div class="svc-thumbs">
+              <div class="svc-thumb" style="background-image:url('hair-auburn-colour.jpg')" role="img" aria-label="Auburn highlights"></div>
+              <div class="svc-thumb" style="background-image:url('hair-blonde-pixie.jpg')" role="img" aria-label="Blonde pixie cut"></div>
+              <div class="svc-thumb" style="background-image:url('hair-cut-senior.jpg')" role="img" aria-label="Classic short cut"></div>
+              <div class="svc-thumb" style="background-image:url('hair-wash.jpg')" role="img" aria-label="Hair wash treatment"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 1B: HAIR — Prices (full width, 8 seconds) -->
+      <div class="svc-slide" data-duration="8000">
+        <div class="svc-slide-info">
+          <div class="svc-info-img" style="background-image:url('hair-collage.jpg')" role="img" aria-label="Hair salon collage"></div>
+          <div class="svc-info-content">
+            <h3>Hair — Treatments &amp; Prices</h3>
+            <ul class="svc-info-list">
+              <li><span>Ladies' Cut &amp; Finish</span><span class="price">from £28</span></li>
+              <li><span>Gents' Cut</span><span class="price">from £15</span></li>
+              <li><span>Colour &amp; Highlights</span><span class="price">from £45</span></li>
+              <li><span>Blow Dry &amp; Styling</span><span class="price">from £18</span></li>
+            </ul>
+            <a href="#booking" class="btn btn-solid">Book Hair Appointment</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2A: NAILS — Intro -->
+      <div class="svc-slide">
+        <div class="svc-slide-intro reverse">
+          <div class="svc-main-img" style="background-image:url('hair-pink-colour.jpg')" role="img" aria-label="Nail treatment — placeholder"></div>
+          <div class="svc-intro-content">
+            <span class="eyebrow">Our Services</span>
+            <h2>Nails</h2>
+            <p>Manicures, pedicures and long-lasting gel polish in a huge range of colours — all done with care and precision at the Draycott salon or as a home visit.</p>
+            <div class="svc-thumbs">
+              <div class="svc-thumb" style="background-color:#e8d4f0;" role="img" aria-label="Nail placeholder 1"></div>
+              <div class="svc-thumb" style="background-color:#d4c8f0;" role="img" aria-label="Nail placeholder 2"></div>
+              <div class="svc-thumb" style="background-color:#f0d4e8;" role="img" aria-label="Nail placeholder 3"></div>
+              <div class="svc-thumb" style="background-color:#c8d4f0;" role="img" aria-label="Nail placeholder 4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2B: NAILS — Prices (8 seconds) -->
+      <div class="svc-slide" data-duration="8000">
+        <div class="svc-slide-info">
+          <div class="svc-info-img" style="background-image:url('hair-facial.jpg')" role="img" aria-label="Nails placeholder"></div>
+          <div class="svc-info-content">
+            <h3>Nails — Treatments &amp; Prices</h3>
+            <ul class="svc-info-list">
+              <li><span>Manicure</span><span class="price">from £18</span></li>
+              <li><span>Pedicure</span><span class="price">from £22</span></li>
+              <li><span>Gel Polish (hands or feet)</span><span class="price">from £20</span></li>
+            </ul>
+            <a href="#booking" class="btn btn-solid">Book Nail Appointment</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3A: BEAUTY & SPA — Intro -->
+      <div class="svc-slide">
+        <div class="svc-slide-intro">
+          <div class="svc-main-img" style="background-image:url('hero-facial.jpg')" role="img" aria-label="Facial treatment"></div>
+          <div class="svc-intro-content">
+            <span class="eyebrow">Our Services</span>
+            <h2>Beauty &amp; Spa</h2>
+            <p>Dermaplaning, microneedling, Swedish massage, waxing and makeup — relaxing treatments that refresh and revive, offered at the salon or in the comfort of your own home.</p>
+            <div class="svc-thumbs">
+              <div class="svc-thumb" style="background-image:url('hero-facial.jpg')" role="img" aria-label="Facial"></div>
+              <div class="svc-thumb" style="background-image:url('hero-wash.jpg')" role="img" aria-label="Hair wash"></div>
+              <div class="svc-thumb" style="background-color:#e0d0f0;" role="img" aria-label="Massage placeholder"></div>
+              <div class="svc-thumb" style="background-color:#f0d8e8;" role="img" aria-label="Waxing placeholder"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3B: BEAUTY & SPA — Prices (8 seconds) -->
+      <div class="svc-slide" data-duration="8000">
+        <div class="svc-slide-info">
+          <div class="svc-info-img" style="background-image:url('hero-facial.jpg')" role="img" aria-label="Facial treatment"></div>
+          <div class="svc-info-content">
+            <h3>Beauty &amp; Spa — Prices</h3>
+            <ul class="svc-info-list">
+              <li><span>Dermaplaning Facial</span><span class="price">£37</span></li>
+              <li><span>Microneedling (1 session)</span><span class="price">from £45</span></li>
+              <li><span>Swedish Massage 30 mins</span><span class="price">£30</span></li>
+              <li><span>Swedish Massage 60 mins</span><span class="price">£40</span></li>
+              <li><span>Back, Neck &amp; Shoulder Massage</span><span class="price">£30</span></li>
+              <li><span>Brow Wax</span><span class="price">£10</span></li>
+            </ul>
+            <a href="#booking" class="btn btn-solid">Book Beauty Treatment</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4A: CROWN REVIVAL — Intro -->
+      <div class="svc-slide">
+        <div class="svc-slide-intro reverse">
+          <div class="svc-main-img" style="background-image:url('imageslogo-crownrevival.jpg');background-color:#000;background-size:contain;" role="img" aria-label="Crown Revival Hair Systems logo"></div>
+          <div class="svc-intro-content">
+            <span class="eyebrow">Our Services</span>
+            <h2>Crown Revival Hair Systems</h2>
+            <p>Non-surgical hair replacement systems for clients experiencing hair thinning or loss. Anne provides private consultations, expert fitting and ongoing styling — giving you natural-looking results and renewed confidence.</p>
+            <div class="svc-thumbs">
+              <div class="svc-thumb" style="background-image:url('imageslogo-crownrevival.jpg');background-color:#000;background-size:contain;" role="img" aria-label="Crown Revival"></div>
+              <div class="svc-thumb" style="background-color:#1e1535;" role="img" aria-label="Consultation placeholder"></div>
+              <div class="svc-thumb" style="background-color:#2b2050;" role="img" aria-label="Fitting placeholder"></div>
+              <div class="svc-thumb" style="background-color:#3a2d6e;" role="img" aria-label="Styling placeholder"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4B: CROWN REVIVAL — Info (8 seconds) -->
+      <div class="svc-slide" data-duration="8000">
+        <div class="svc-slide-info">
+          <div class="svc-info-img" style="background-image:url('imageslogo-crownrevival.jpg');background-color:#000;background-size:contain;" role="img" aria-label="Crown Revival logo"></div>
+          <div class="svc-info-content">
+            <h3>Crown Revival — What to Expect</h3>
+            <ul class="svc-info-list">
+              <li><span>Private, personal consultation</span></li>
+              <li><span>Colour &amp; style matching to blend naturally</span></li>
+              <li><span>Expert fitting carried out by Anne</span></li>
+              <li><span>Ongoing maintenance appointments</span></li>
+              <li><span>Available at salon or as a home visit</span></li>
+            </ul>
+            <a href="#booking" class="btn btn-solid">Enquire About Crown Revival</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end svc-slides -->
+  </section>
+
   <!-- ============ SERVICES ============ -->
+
   <section class="section section-alt" id="services">
     <div class="container">
       <span class="eyebrow">Treatment Menu</span>
@@ -724,7 +967,8 @@ footer{background:var(--dark);color:#c8bedf;padding:60px 0 30px;border-top:1px s
 
       <div class="service-groups reveal-stagger">
 
-        <div class="service-card">
+        <div class="service-card service-card--img">
+          <div class="card-img" style="background-image:url('hair-pink-colour.jpg')" role="img" aria-label="Pink colour and styling result"></div>
           <h3>Hair</h3>
           <ul class="service-list">
             <li><span class="name">Ladies' Cut &amp; Finish<span class="desc">Consultation, shampoo, cut &amp; blow dry</span></span><span class="dots"></span><span class="price">from £28</span></li>
@@ -1031,6 +1275,45 @@ footer{background:var(--dark);color:#c8bedf;padding:60px 0 30px;border-top:1px s
 <!-- ============ SCRIPTS ============ -->
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Services showcase slider
+(function(){
+  const slides = document.querySelectorAll('#svcSlides .svc-slide');
+  const bar = document.getElementById('svcProgressBar');
+  if(!slides.length) return;
+  let current = 0;
+  let timer, animFrame;
+  const DEFAULT_DURATION = 5000;
+
+  function getDuration(i){
+    return parseInt(slides[i].dataset.duration) || DEFAULT_DURATION;
+  }
+
+  function show(i){
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    startProgress(getDuration(current));
+  }
+
+  function startProgress(duration){
+    clearTimeout(timer);
+    cancelAnimationFrame(animFrame);
+    const start = performance.now();
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bar.style.transition = `width ${duration}ms linear`;
+        bar.style.width = '100%';
+      });
+    });
+    timer = setTimeout(() => show(current + 1), duration);
+  }
+
+  // Start
+  startProgress(getDuration(0));
+})();
 
 // Scroll-triggered reveal animations for section transitions
 const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
